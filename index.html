@@ -6,39 +6,44 @@
     <title>Elements</title>
 </head>
 <body>
+<span class="element-pool"></span>
 <span class="spell-container">
-    <span class="fire element-container" id="spell3" draggable="false">
+    <span class="element-container" data-element="" id="spell3" draggable="false">
         <span class="element-select" draggable="false">
-            <span class="fire select pos1" draggable="false"></span>
-            <span class="earth select pos2" draggable="false"></span>
-            <span class="growth select pos3" draggable="false"></span>
-            <span class="water select pos4" draggable="false"></span>
-            <span class="air select pos5" draggable="false"></span>
-            <span class="decay select pos6" draggable="false"></span>
+            <span class="select pos1" data-element="fire" draggable="false"></span>
+            <span class="select pos2" data-element="earth" draggable="false"></span>
+            <span class="select pos3" data-element="growth" draggable="false"></span>
+            <span class="select pos4" data-element="water" draggable="false"></span>
+            <span class="select pos5" data-element="air" draggable="false"></span>
+            <span class="select pos6" data-element="decay" draggable="false"></span>
         </span>
     </span>
-    <span class="fire element-container" id="spell4" draggable="false">
+    <span class="element-container" data-element="" id="spell4" draggable="false">
         <span class="element-select" draggable="false">
-            <span class="fire select pos1" draggable="false"></span>
-            <span class="earth select pos2" draggable="false"></span>
-            <span class="growth select pos3" draggable="false"></span>
-            <span class="water select pos4" draggable="false"></span>
-            <span class="air select pos5" draggable="false"></span>
-            <span class="decay select pos6" draggable="false"></span>
+            <span class="select pos1" data-element="fire" draggable="false"></span>
+            <span class="select pos2" data-element="earth" draggable="false"></span>
+            <span class="select pos3" data-element="growth" draggable="false"></span>
+            <span class="select pos4" data-element="water" draggable="false"></span>
+            <span class="select pos5" data-element="air" draggable="false"></span>
+            <span class="select pos6" data-element="decay" draggable="false"></span>
         </span>
     </span>
-    <span class="fire element-container" id="spell5" draggable="false">
+    <span class="element-container" data-element="" id="spell5" draggable="false">
         <span class="element-select" draggable="false">
-            <span class="fire select pos1" draggable="false"></span>
-            <span class="earth select pos2" draggable="false"></span>
-            <span class="growth select pos3" draggable="false"></span>
-            <span class="water select pos4" draggable="false"></span>
-            <span class="air select pos5" draggable="false"></span>
-            <span class="decay select pos6" draggable="false"></span>
+            <span class="select pos1" data-element="fire" draggable="false"></span>
+            <span class="select pos2" data-element="earth" draggable="false"></span>
+            <span class="select pos3" data-element="growth" draggable="false"></span>
+            <span class="select pos4" data-element="water" draggable="false"></span>
+            <span class="select pos5" data-element="air" draggable="false"></span>
+            <span class="select pos6" data-element="decay" draggable="false"></span>
         </span>
     </span>
 </span>
+<script src="vendors/eventpublisher/events.js"></script>
 <script src="js/Elements.js"></script>
+<script src="js/ElementPoolView.js"></script>
+<script src="js/ElementPool.js"></script>
+<script src="js/SpellSocketView.js"></script>
 <script src="js/SpellSocketController.js"></script>
 <script type="application/javascript">Elements.init();</script>
 </body>

@@ -2,6 +2,15 @@
     display: none !important;
 }
 
+.element-pool span {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: inline-block;
+    background-size: contain !important;
+    text-align: center;
+}
+
 .spell-container {
     position: absolute;
     top: 200px;
@@ -66,26 +75,27 @@
     transform: rotate(300deg) translate(0,100%) rotate(-300deg);
 }
 
-.fire {
+*[data-element='fire'] {
     background: url(https://png.icons8.com/color/50/000000/fire-element.png) no-repeat;
 }
 
-.water {
+*[data-element='water'] {
     background: url(https://png.icons8.com/color/50/000000/water.png) no-repeat;
 }
 
-.decay {
+
+*[data-element='decay'] {
     background: url(https://png.icons8.com/color/50/000000/thriller.png) no-repeat;
 }
 
-.growth {
+*[data-element='growth'] {
     background: url(https://png.icons8.com/color/50/000000/natural-food.png) no-repeat;
 }
 
-.earth {
+*[data-element='earth'] {
     background: url(https://png.icons8.com/color/50/000000/rock.png) no-repeat;
 }
 
-.air {
-    background: url(https://png.icons8.com/color/50/000000/air-element.png) no-repeat;
+*[data-element='air'] {
+    background: url(https://png.icons8.com/color/40/000000/air-element.png) no-repeat;
 }

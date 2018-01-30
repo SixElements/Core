@@ -2,41 +2,66 @@ var Elements = Elements || {};
 
 Elements.SpellSocketController = function (options) {
 
-    let that = {},
+    let that = new EventPublisher(),
         elementPool = options.elementPool,
         spell = options.spell,
-        spellView = options.view,
-        currentElement;
+        spellViews = options.views,
+        poolView = options.poolView;
 
     function init() {
-        spellView.addEventListener("mouseup",function(event) {
-            if(event.target.classList.contains("select")) {
-                let selectedElement = event.target.classList[0];
-                console.log(selectedElement);
-                updateSpell(selectedElement);
-            }
+        initPool();
+        initViews();
+    }
+
+    function initPool() {
+        poolView.init(elementPool.getPool());
+        that.addEventListener("elementAddedToPool", elementPool.add);
+        that.addEventListener("elementRemovedFromPool", elementPool.remove);
+        that.addEventListener("elementRemovedFromPool", poolView.decrementElement);
+        that.addEventListener("elementAddedToPool", poolView.incrementElement);
+    }
+
+    function initViews() {
+        spellViews.forEach(function (spellView) {
+            spellView.getViewNode().addEventListener("mouseup", onMultiplierSelect.bind(undefined, spellView));
+            that.addEventListener("elementAvailable", spellView.enableMultiplier);
+            that.addEventListener("elementUnavailable", spellView.disableMultiplier)
         });
     }
 
-    function updateSpellMultiplierView() {
-        let spellMultiplierViews = spellView.querySelectorAll(".select");
+    function onMultiplierSelect(spellView, event) {
+        if (event.target.classList.contains("select")) {
+            let selectedElement = event.target.dataset.element,
+                previousElement = spellView.getElement();
 
-        elementPool.forEach(function (element) {
-            spellMultiplierViews.forEach(function (multiplierView) {
-                if (multiplierView.classList.contains(element.name)){
-                    multiplierView.classList.remove("hidden");
-                } else {
-                    multiplierView.classList.add("hidden");
-                }
-            });
-        })
+            console.log(previousElement, selectedElement);
+            updateSpell(spellView, previousElement, selectedElement);
+        }
     }
 
-    function updateSpell(element) {
-        spellView.classList.remove(currentElement);
-        spellView.classList.add(element);
-        currentElement = element;
+    function updateElementPool(previousElement, element) {
 
+        if (previousElement !== "") {
+            if (elementPool.getCount(previousElement) === 0) {
+                console.log("re-enabling element " + previousElement);
+                that.notifyAll("elementAvailable", previousElement);
+            }
+            that.notifyAll("elementAddedToPool", previousElement);
+        }
+
+        that.notifyAll("elementRemovedFromPool", element);
+        if (elementPool.getCount(element) === 0) {
+            that.notifyAll("elementUnavailable", element);
+        }
+
+    }
+
+    function updateSpell(spellView, previousElement, element) {
+        console.log("selected element: " + element + ", count: " + elementPool.getCount(element));
+        if (elementPool.getCount(element) > 0) {
+            spellView.updateSpell(element);
+            updateElementPool(previousElement, element);
+        }
     }
 
     that.init = init;

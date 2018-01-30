@@ -3,25 +3,29 @@ var Elements = (function () {
 
     function init() {
         let spell = 1,
-            elements = ["fire", "water", "earth", "air", "growth", "decay"],
+            elementPool = new Elements.ElementPool({
+                pool: {
+                    "fire": 6,
+                    "water": 6,
+                    "earth": 3,
+                    "air": 1,
+                    "growth": 2,
+                    "decay": 1
+                }
+            }),
+            poolView = new Elements.ElementPoolView({view: document.querySelector(".element-pool")}),
+            spellSocketViews = [
+                new Elements.SpellSocketView({view: document.querySelector("#spell3")}),
+                new Elements.SpellSocketView({view: document.querySelector("#spell4")}),
+                new Elements.SpellSocketView({view: document.querySelector("#spell5")})
+            ],
             spellAController = new Elements.SpellSocketController({
-                elementPool: elements,
+                elementPool: elementPool,
                 spell: spell,
-                view: document.querySelector("#spell3")
-            }),
-            spellBController = new Elements.SpellSocketController({
-                elementPool: elements,
-                spell: spell,
-                view: document.querySelector("#spell4")
-            }),
-            spellCController = new Elements.SpellSocketController({
-                elementPool: elements,
-                spell: spell,
-                view: document.querySelector("#spell5")
+                views: spellSocketViews,
+                poolView: poolView
             });
         spellAController.init();
-        spellBController.init();
-        spellCController.init();
     }
 
     that.init = init;
